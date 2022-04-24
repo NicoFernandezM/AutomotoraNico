@@ -24,10 +24,13 @@ public class Automotora {
         return vendedores;
     }
 
-    public void añadirVendedor(Vendedor vendedor) {
+    public boolean añadirVendedor(Vendedor vendedor) {
         if(DigitoVerificador.validarRut(vendedor.getRut())) {
             this.vendedores.add(vendedor);
+            return true;
         }
+
+        return false;
     }
 
     public void añadirVehiculosPorVender(){
