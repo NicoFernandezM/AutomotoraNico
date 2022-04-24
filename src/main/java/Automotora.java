@@ -4,10 +4,12 @@ import java.util.List;
 public class Automotora {
     private List<Vehiculo> vehiculosAVenta;
     private List<Vehiculo> vehiculosVendidos;
+    private List<Vendedor> vendedores;
 
     public Automotora(){
         this.vehiculosAVenta= new ArrayList<Vehiculo>();
         this.vehiculosVendidos= new ArrayList<Vehiculo>();
+        this.vendedores= new ArrayList<>();
     }
 
     public List<Vehiculo> getVehiculosAVenta() {
@@ -16,6 +18,16 @@ public class Automotora {
 
     public List<Vehiculo> getVehiculosVendidos() {
         return vehiculosVendidos;
+    }
+
+    public List<Vendedor> getVendedores() {
+        return vendedores;
+    }
+
+    public void añadirVendedor(Vendedor vendedor) {
+        if(DigitoVerificador.validarRut(vendedor.getRut())) {
+            this.vendedores.add(vendedor);
+        }
     }
 
     public void añadirVehiculosPorVender(){
@@ -38,15 +50,6 @@ public class Automotora {
                break;
             }
         }
-    }
-    public List<Vehiculo> buscarAutoNombreForBasico(String nombre){
-        List<Vehiculo> vehiculos= new ArrayList<>();
-        for(int i=0; i<this.vehiculosAVenta.size(); i++){
-            if(this.vehiculosAVenta.get(i).getNombre().equals(nombre)){
-                vehiculos.add(this.vehiculosAVenta.get(i));
-            }
-        }
-        return vehiculos;
     }
 
     public List<Vehiculo> buscarAutoNombre(String nombre){
@@ -75,12 +78,13 @@ public class Automotora {
             System.out.println(datos);
         }
     }
-    public void probarSistema(){
-        Automotora automotora= new Automotora();
-        automotora.añadirVehiculosPorVender();
-        automotora.mostrarAutosLista(automotora.buscarAutoNombre("Celerio"));
-        automotora.venderAuto("Celerio",2018);
-        automotora.mostrarAutosLista(automotora.getVehiculosVendidos());
+
+    public void mostrarVendedores() {
+        for(Vendedor vendedor : vendedores) {
+            String datos = "Nombre: " + vendedor.getNombre() + "\nEdad: " + vendedor.getEdad() + "\nRut: "
+                    + vendedor.getRut();
+            System.out.println(datos);
+        }
     }
     }
 
