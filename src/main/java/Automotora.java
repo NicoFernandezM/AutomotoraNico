@@ -5,11 +5,13 @@ public class Automotora {
     private List<Vehiculo> vehiculosAVenta;
     private List<Vehiculo> vehiculosVendidos;
     private List<Vendedor> vendedores;
+    private List<Cliente> clientes;
 
     public Automotora(){
         this.vehiculosAVenta= new ArrayList<Vehiculo>();
         this.vehiculosVendidos= new ArrayList<Vehiculo>();
-        this.vendedores= new ArrayList<>();
+        this.vendedores = new ArrayList<>();
+        this.clientes = new ArrayList<>();
     }
 
     public List<Vehiculo> getVehiculosAVenta() {
@@ -24,12 +26,24 @@ public class Automotora {
         return vendedores;
     }
 
+    public List<Cliente> getClientes() {
+        return clientes;
+    }
+
     public boolean añadirVendedor(Vendedor vendedor) {
         if(DigitoVerificador.validarRut(vendedor.getRut())) {
             this.vendedores.add(vendedor);
             return true;
         }
 
+        return false;
+    }
+
+    public boolean añadirCliente(Cliente cliente) {
+        if(DigitoVerificador.validarRut(cliente.getRut())) {
+            this.clientes.add(cliente);
+            return true;
+        }
         return false;
     }
 
@@ -86,6 +100,16 @@ public class Automotora {
         for(Vendedor vendedor : vendedores) {
             String datos = "Nombre: " + vendedor.getNombre() + "\nEdad: " + vendedor.getEdad() + "\nRut: "
                     + vendedor.getRut();
+            System.out.println(datos);
+        }
+    }
+
+    public void mostrarClientes() {
+        for(Cliente cliente : clientes) {
+            String datos = "Nombre: " + cliente.getNombre() + "\nDirección: " + cliente.getDireccion() +
+                    "\nNúmero telefónico: " + cliente.getNumeroTelefonico() + "\nCorreo eléctronico: " +
+                    cliente.getCorreoElectronico() + "\nRut: " + cliente.getRut();
+
             System.out.println(datos);
         }
     }
