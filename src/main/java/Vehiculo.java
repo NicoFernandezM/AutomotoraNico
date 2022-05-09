@@ -77,4 +77,9 @@ public class Vehiculo {
     public void rellenarCombustible(double cantCombustible){
         this.cantidadCombustible+= cantCombustible;
     }
+
+    public String toString() {
+        return ("\nNombre: " + this.nombre + "\nMarca: " + this.marca +
+                "\nAño: " + this.año);
+    }
 }

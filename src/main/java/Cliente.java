@@ -32,4 +32,9 @@ public class Cliente {
     public String getRut () {
         return this.rut;
     }
+
+    public String toString() {
+        return ("\nNombre: " + this.nombre + "\nDirección: " + this.direccion +
+                "\nRut: " + this.rut);
+    }
 }

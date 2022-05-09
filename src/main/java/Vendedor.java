@@ -20,4 +20,9 @@ public class Vendedor {
     public String getRut() {
         return this.rut;
     }
+
+    public String toString() {
+        return ("\nNombre: " + this.nombre + "\nEdad: " + this.edad +
+                "\nRut: " + this.rut);
+    }
 }
