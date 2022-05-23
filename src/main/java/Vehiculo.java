@@ -1,16 +1,20 @@
 public class Vehiculo {
-    private String nombre, color, marca;
+    private String nombre;
+    private ColorVehiculo colorVehiculo;
+    private MarcaVehiculo marcaVehiculo;
     private int año, precio;
     private double kmRecorridos, cantidadCombustible;
 
-    public Vehiculo(String nombre, String color, String marca, int año, int precio, double kmRecorridos){
-        this.nombre=nombre;
-        this.color=color;
-        this.marca=marca;
-        this.año=año;
-        this.precio=precio;
-        this.kmRecorridos=kmRecorridos;
-        this.cantidadCombustible=0;
+    public Vehiculo(String nombre, ColorVehiculo colorVehiculo, MarcaVehiculo marcaVehiculo,
+                    int año, int precio, double kmRecorridos){
+
+        this.nombre = nombre;
+        this.colorVehiculo = colorVehiculo;
+        this.marcaVehiculo = marcaVehiculo;
+        this.año = año;
+        this.precio = precio;
+        this.kmRecorridos = kmRecorridos;
+        this.cantidadCombustible = 0;
     }
 
     public String getNombre() {
@@ -22,19 +26,19 @@ public class Vehiculo {
     }
 
     public String getColor() {
-        return color;
+        return colorVehiculo.getColorVehiculo();
     }
 
-    public void setColor(String color) {
-        this.color = color;
+    public void setColor(ColorVehiculo color) {
+        this.colorVehiculo = color;
     }
 
     public String getMarca() {
-        return marca;
+        return marcaVehiculo.getMarcaVehiculo();
     }
 
-    public void setMarca(String marca) {
-        this.marca = marca;
+    public void setMarca(MarcaVehiculo marca) {
+        this.marcaVehiculo = marca;
     }
 
     public int getAño() {
@@ -79,7 +83,7 @@ public class Vehiculo {
     }
 
     public String toString() {
-        return ("\nNombre: " + this.nombre + "\nMarca: " + this.marca +
+        return ("\nNombre: " + this.nombre + "\nMarca: " + this.marcaVehiculo +
                 "\nAño: " + this.año);
     }
 }
