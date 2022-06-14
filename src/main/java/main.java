@@ -3,6 +3,7 @@ import java.io.IOException;
 public class main {
     public static void main(String[] args) throws IOException {
         Automotora automotora = new Automotora();
+        GestorDatos.leerArchivoVehiculos(automotora, "target.vehiculos.txt");
         automotora.añadirVehiculosPorVender();
         automotora.añadirVendedor(new Vendedor("Juan", 30, "123456785"));
         automotora.añadirCliente(new Cliente("Marcelo", "Av. Alemania 2045", 12345678,

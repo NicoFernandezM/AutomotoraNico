@@ -1,20 +1,13 @@
-public class Cliente {
-    private String nombre;
+public class Cliente extends Persona {
     private String direccion;
     private int numeroTelefonico;
     private String correoElectronico;
-    private String rut;
 
     public Cliente (String nombre, String direccion, int numeroTelefonico, String correoElectronico, String rut) {
-        this.nombre = nombre;
+        super(nombre, rut);
         this.direccion = direccion;
         this.numeroTelefonico = numeroTelefonico;
         this.correoElectronico = correoElectronico;
-        this.rut = rut;
-    }
-
-    public String getNombre () {
-        return this.nombre;
     }
 
     public String getDireccion () {
@@ -29,8 +22,8 @@ public class Cliente {
         return this.correoElectronico;
     }
 
-    public String getRut () {
-        return this.rut;
+    public void obtenerDescuento() {
+        System.out.println("El cliente " + getNombre() + " tiene un 20% de descuento");
     }
 
     public String toString() {

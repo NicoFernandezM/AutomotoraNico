@@ -1,24 +1,17 @@
-public class Vendedor {
-    private String nombre;
+public class Vendedor extends Persona{
     private int edad;
-    private String rut;
 
     public Vendedor(String nombre, int edad, String rut) {
-        this.nombre = nombre;
+        super(nombre, rut);
         this.edad = edad;
-        this.rut = rut;
-    }
-
-    public String getNombre() {
-        return this.nombre;
     }
 
     public int getEdad() {
         return this.edad;
     }
 
-    public String getRut() {
-        return this.rut;
+    public void obtenerDescuento() {
+        System.out.println("El vendedor " + getNombre() + " tiene un 10% de descuento");
     }
 
     public String toString() {

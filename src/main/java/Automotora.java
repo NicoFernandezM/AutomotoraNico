@@ -34,6 +34,7 @@ public class Automotora {
     public boolean añadirVendedor(Vendedor vendedor) {
         if (DigitoVerificador.validarRut(vendedor.getRut())) {
             this.vendedores.add(vendedor);
+            GestorDatos.registrarDato(vendedor, "vendedor.txt");
             return true;
         }
 
@@ -133,7 +134,6 @@ public class Automotora {
         for (Venta venta : ventas) {
             gestorPDF.generarBoleta(venta);
         }
-
     }
 }
 
