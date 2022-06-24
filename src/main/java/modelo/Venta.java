@@ -1,3 +1,8 @@
+package modelo;
+
+import modelo.Cliente;
+import modelo.Vehiculo;
+
 import java.util.Date;
 
 public class Venta {

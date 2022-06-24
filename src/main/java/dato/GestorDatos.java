@@ -1,6 +1,11 @@
+package dato;
+
+import modelo.Automotora;
+import modelo.ColorVehiculo;
+import modelo.MarcaVehiculo;
+import modelo.Vehiculo;
+
 import java.io.*;
-import java.util.Arrays;
-import java.util.Locale;
 
 public class GestorDatos {
     public static Automotora leerArchivoVehiculos(Automotora automotora, String direccionArchivo) {
@@ -13,7 +18,7 @@ public class GestorDatos {
             while((textoArchivo = br.readLine()) != null){
                 String[] data = textoArchivo.split(",");
                 automotora.getVehiculosAVenta().add(new Vehiculo(data[0],
-                        ColorVehiculo.valueOf(data[1].toUpperCase()),MarcaVehiculo.valueOf(data[2].toUpperCase()),
+                        ColorVehiculo.valueOf(data[1].toUpperCase()), MarcaVehiculo.valueOf(data[2].toUpperCase()),
                         Integer.parseInt(data[3]),Integer.parseInt(data[4]),Double.parseDouble(data[5])));
             }
         } catch (Exception e) {
@@ -31,8 +36,8 @@ public class GestorDatos {
 //Lee cada linea del archivo hasta que la linea sea nula
             while((textoArchivo = br.readLine()) != null){
                 String[] data = textoArchivo.split(",");
-                /*automotora.getVendedores().add(new Vendedor(data[0],
-                        ColorVehiculo.valueOf(data[1].toUpperCase()),MarcaVehiculo.valueOf(data[2].toUpperCase()),
+                /*automotora.getVendedores().add(new modelo.Vendedor(data[0],
+                        modelo.ColorVehiculo.valueOf(data[1].toUpperCase()),modelo.MarcaVehiculo.valueOf(data[2].toUpperCase()),
                         Integer.parseInt(data[3]),Integer.parseInt(data[4]),Double.parseDouble(data[5])));*/
             }
         } catch (Exception e) {

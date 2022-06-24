@@ -1,3 +1,10 @@
+package modelo;
+
+import utils.DigitoVerificador;
+import utils.GestorPDF;
+
+import dato.GestorDatos;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;

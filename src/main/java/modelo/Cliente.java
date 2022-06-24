@@ -1,9 +1,9 @@
-public class Cliente extends Persona {
-    private String direccion;
-    private int numeroTelefonico;
-    private String correoElectronico;
+package modelo;
 
-    public Cliente (String nombre, String direccion, int numeroTelefonico, String correoElectronico, String rut) {
+public class Cliente extends Persona {
+    private String direccion, numeroTelefonico, correoElectronico;
+
+    public Cliente (String nombre, String rut, String direccion, String numeroTelefonico, String correoElectronico) {
         super(nombre, rut);
         this.direccion = direccion;
         this.numeroTelefonico = numeroTelefonico;
@@ -14,7 +14,7 @@ public class Cliente extends Persona {
         return this.direccion;
     }
 
-    public int getNumeroTelefonico () {
+    public String getNumeroTelefonico () {
         return this.numeroTelefonico;
     }
 

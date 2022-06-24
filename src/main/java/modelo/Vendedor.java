@@ -1,4 +1,8 @@
-public class Vendedor extends Persona{
+package modelo;
+
+import modelo.Persona;
+
+public class Vendedor extends Persona {
     private int edad;
 
     public Vendedor(String nombre, int edad, String rut) {

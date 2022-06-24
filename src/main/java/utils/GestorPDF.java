@@ -1,3 +1,6 @@
+package utils;
+
+import modelo.Venta;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;
@@ -35,14 +38,14 @@ public class GestorPDF {
     public String[] obtenerLíneasPdf(Venta venta) {
         String[] lineasPdf = new String[8];
         lineasPdf[0] = "Boleta electrónica - venta Automovil";
-        lineasPdf[1] = "Automotora Temuco";
+        lineasPdf[1] = "modelo.Automotora Temuco";
         lineasPdf[2] = "Fecha: " + venta.getFecha().toString();
         lineasPdf[3] = venta.getCliente().toString().replaceAll("\n", " ");
 
         lineasPdf[4] = "---------------------------------------------------------------------";
-        lineasPdf[5] = "Vehiculo comprado";
+        lineasPdf[5] = "modelo.Vehiculo comprado";
         lineasPdf[6] = venta.getVehiculo().toString().replaceAll("\n", " ");
-        lineasPdf[7] = "Vendedor: " + venta.getVendedor().getNombre();
+        lineasPdf[7] = "modelo.Vendedor: " + venta.getVendedor().getNombre();
         return lineasPdf;
     }
 

@@ -1,3 +1,5 @@
+package modelo;
+
 public enum ColorVehiculo {
 	BLANCO("Blanco"),
 	NEGRO("Negro"),

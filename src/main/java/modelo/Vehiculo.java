@@ -1,3 +1,5 @@
+package modelo;
+
 public class Vehiculo {
     private String nombre;
     private ColorVehiculo colorVehiculo;
