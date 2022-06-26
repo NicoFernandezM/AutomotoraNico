@@ -1,5 +1,6 @@
 package gui;
 
+import modelo.Automotora;
 import modelo.ColorVehiculo;
 import modelo.MarcaVehiculo;
 
@@ -8,12 +9,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class VentanaRegistroVehiculos extends Ventana implements ActionListener {
+    Automotora automotora;
+
     JComboBox <MarcaVehiculo> marcasBox = new JComboBox<>(MarcaVehiculo.values());
     JComboBox <ColorVehiculo> colorVehiculoBox = new JComboBox<>(ColorVehiculo.values());
     JComboBox añoBox;
     JFormattedTextField precioField;
     JFormattedTextField kmField;
-    JFormattedTextField combustibleField;
 
     JTextField nombreField;
 
@@ -21,7 +23,7 @@ public class VentanaRegistroVehiculos extends Ventana implements ActionListener 
     JButton aceptarBtn;
     JButton cancelarBtn;
 
-    public VentanaRegistroVehiculos () {
+    public VentanaRegistroVehiculos (Automotora automotora) {
         JLabel titulo = this.generarEtiqueta("Registro Vehículos", 70, 80,
                 300, 40,"Forte", 30);
 
@@ -41,8 +43,6 @@ public class VentanaRegistroVehiculos extends Ventana implements ActionListener 
         JLabel km = this.generarEtiqueta("Km recorridos: ", 20,400,120,25,
                 "Calibri", 17);
 
-        JLabel combustible = this.generarEtiqueta("Combustible: ", 20,450,120,25,
-                "Calibri", 17);
 
         nombreField = this.generarCampoDeTexto(160, 150, 150, 20);
 
@@ -56,11 +56,10 @@ public class VentanaRegistroVehiculos extends Ventana implements ActionListener 
 
         precioField = this.generarCampoDeTextoFormateado(160, 350, 150, 20);
         kmField = this.generarCampoDeTextoFormateado(160, 400, 150, 20);
-        combustibleField = this.generarCampoDeTextoFormateado(160, 450, 150, 20);
 
         volverBtn = this.generarBoton("<--", 20,20,50,25);
-        aceptarBtn = this.generarBoton("Aceptar", 100,490,100,50);
-        cancelarBtn = this.generarBoton("Cancelar", 200,490,100,50);
+        aceptarBtn = this.generarBoton("Aceptar", 100,450,100,50);
+        cancelarBtn = this.generarBoton("Cancelar", 200,450,100,50);
 
         volverBtn.addActionListener(this);
         aceptarBtn.addActionListener(this);
@@ -71,12 +70,11 @@ public class VentanaRegistroVehiculos extends Ventana implements ActionListener 
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == volverBtn) {
             this.dispose();
-            MenuVentas menuVentas = new MenuVentas();
+            new MenuVentas(this.automotora);
         } else if(e.getSource() == cancelarBtn) {
             nombreField.setText("");
             precioField.setText("");
             kmField.setText("");
-            combustibleField.setText("");
         }
     }
 }

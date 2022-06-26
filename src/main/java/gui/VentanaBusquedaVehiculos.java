@@ -1,21 +1,26 @@
 package gui;
 
+import modelo.Automotora;
 import modelo.MarcaVehiculo;
+import modelo.Vehiculo;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 public class VentanaBusquedaVehiculos extends Ventana implements ActionListener {
-    JComboBox <MarcaVehiculo> marcasBox = new JComboBox<>(MarcaVehiculo.values());
+    Automotora automotora;
 
+    JComboBox <MarcaVehiculo> marcasBox = new JComboBox<>(MarcaVehiculo.values());
     JButton volverBtn;
     JButton buscarBtn;
     JButton cancelarBtn;
 
     JTextField nombreField;
 
-    public VentanaBusquedaVehiculos () {
+    public VentanaBusquedaVehiculos (Automotora automotora) {
+        this.automotora = automotora;
         JLabel titulo = this.generarEtiqueta("Búsqueda de Vehículos", 35, 80,
                 400, 40,"Forte", 30);
 
@@ -39,13 +44,27 @@ public class VentanaBusquedaVehiculos extends Ventana implements ActionListener 
         cancelarBtn.addActionListener(this);
     }
 
+    public void buscarAuto() {
+        List<Vehiculo> vehiculos = this.automotora.buscarAutoMarca(marcasBox.getSelectedItem().toString());
+        if(!nombreField.getText().equals("")) {
+            vehiculos = this.automotora.buscarAutoNombre(nombreField.getText(), vehiculos);
+        }
+
+        JOptionPane.showMessageDialog(this, vehiculos.size() > 0 ?
+                        this.automotora.mostrarAutosLista(vehiculos) : "No se encontraron coincidencias",
+                "Vehiculos", JOptionPane.INFORMATION_MESSAGE);
+
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == volverBtn) {
             this.dispose();
-            MenuVentas menuVentas = new MenuVentas();
+            new MenuVentas(this.automotora);
         } else if(e.getSource() == cancelarBtn) {
             nombreField.setText("");
+        } else if(e.getSource() == buscarBtn) {
+            buscarAuto();
         }
     }
 }

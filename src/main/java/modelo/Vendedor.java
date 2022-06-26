@@ -1,7 +1,5 @@
 package modelo;
 
-import modelo.Persona;
-
 public class Vendedor extends Persona {
     private int edad;
 
@@ -19,7 +17,7 @@ public class Vendedor extends Persona {
     }
 
     public String toString() {
-        return ("\nNombre: " + this.nombre + "\nEdad: " + this.edad +
-                "\nRut: " + this.rut);
+        return (this.nombre + "," + this.edad +
+                "," + this.rut);
     }
 }

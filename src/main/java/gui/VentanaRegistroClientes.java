@@ -1,11 +1,17 @@
 package gui;
 
+import dato.GestorDatos;
+import modelo.Automotora;
+import modelo.Cliente;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.NumberFormat;
 
 public class VentanaRegistroClientes extends Ventana implements ActionListener {
+    Automotora automotora;
+
     JTextField nombreField;
     JTextField rutField;
     JTextField direccionField;
@@ -17,7 +23,9 @@ public class VentanaRegistroClientes extends Ventana implements ActionListener {
     JButton aceptarBtn;
     JButton cancelarBtn;
 
-    public VentanaRegistroClientes() {
+    public VentanaRegistroClientes(Automotora automotora) {
+        this.automotora = automotora;
+
         JLabel titulo = this.generarEtiqueta("Registro Clientes", 80, 100,
                 300, 40,"Forte", 30);
 
@@ -47,19 +55,40 @@ public class VentanaRegistroClientes extends Ventana implements ActionListener {
         cancelarBtn.addActionListener(this);
     }
 
+    public void registrarCliente() {
+        Cliente cliente = new Cliente(nombreField.getText(), rutField.getText(), direccionField.getText(),
+                numeroField.getText(), correoField.getText());
+
+        if(this.automotora.añadirCliente(cliente)) {
+            JOptionPane.showMessageDialog(this, "Cliente registrado correctamente",
+                    "Mensaje informativo", JOptionPane.INFORMATION_MESSAGE);
+            GestorDatos.registrarDato(cliente, "target.clientes.txt");
+        } else {
+            JOptionPane.showMessageDialog(this, "Rut ingresado inválido",
+                    "Mensaje informativo", JOptionPane.INFORMATION_MESSAGE);
+        }
+
+    }
+
+    public void limpiarTextField() {
+        nombreField.setText("");
+        rutField.setText("");
+        direccionField.setText("");
+        numeroField.setText("");
+        correoField.setText("");
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == volverBtn) {
             this.dispose();
-            MenuVentas menuVentas = new MenuVentas();
+            MenuVentas menuVentas = new MenuVentas(this.automotora);
         } else if(e.getSource() == aceptarBtn) {
-            System.out.println("Hola");
+            registrarCliente();
+            limpiarTextField();
+            System.out.println(automotora.getClientes());
         } else if(e.getSource() == cancelarBtn) {
-            nombreField.setText("");
-            rutField.setText("");
-            direccionField.setText("");
-            numeroField.setText("");
-            correoField.setText("");
+            limpiarTextField();
         }
     }
 }

@@ -87,34 +87,36 @@ public class Automotora {
         return (int) Math.round(Math.random() * (largoLista - 1));
     }
 
-    public List<Vehiculo> buscarAutoNombre(String nombre) {
+    public List<Vehiculo> buscarAutoNombre(String nombre, List<Vehiculo> listaVehiculos) {
         List<Vehiculo> vehiculos = new ArrayList<Vehiculo>();
-        for (Vehiculo auto : this.vehiculosAVenta) {
-            if (auto.getNombre().equals(nombre)) {
+        for (Vehiculo auto : listaVehiculos) {
+            if (auto.getNombre().equalsIgnoreCase(nombre)) {
                 vehiculos.add(auto);
             }
         }
         return vehiculos;
     }
-
-
 
     public List<Vehiculo> buscarAutoMarca(String marca) {
         List<Vehiculo> vehiculos = new ArrayList<Vehiculo>();
         for (Vehiculo auto : this.vehiculosAVenta) {
-            if (auto.getMarca().equals(marca)) {
+            if (auto.getMarca().equalsIgnoreCase(marca)) {
                 vehiculos.add(auto);
             }
         }
         return vehiculos;
     }
 
-    public void mostrarAutosLista(List<Vehiculo> vehiculos) {
+    public String mostrarAutosLista(List<Vehiculo> vehiculos) {
+        StringBuilder datos = new StringBuilder();
         for (Vehiculo auto : vehiculos) {
-            String datos = "nombre: " + auto.getNombre() + ", marca: " + auto.getMarca() + ", año: " + auto.getAño()
-                    + ", color= " + auto.getColor() + ", precio: " + auto.getPrecio() + ", kmRecorridos: " + auto.getKmRecorridos();
-            System.out.println(datos);
+            datos.append("nombre: ").append(auto.getNombre()).append(", marca: ").append(auto.getMarca()).
+                    append(", año: ").append(auto.getAño()).append(", color: ").append(auto.getColor()).
+                    append(", precio: ").append(auto.getPrecio()).append(", kmRecorridos: ").
+                    append(auto.getKmRecorridos()).append("\n");
         }
+
+        return datos.toString();
     }
 
     public void mostrarVendedores() {

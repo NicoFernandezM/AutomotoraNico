@@ -1,5 +1,7 @@
 package gui;
 
+import modelo.Automotora;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,8 +12,10 @@ public class MenuVentas extends Ventana implements ActionListener {
     JButton btnBusquedaVehiculos;
     JButton btnVenderVehiculo;
     JButton btnSalir;
+    Automotora automotora;
 
-    public MenuVentas() {
+    public MenuVentas(Automotora automotora) {
+        this.automotora = automotora;
         JLabel titulo = this.generarEtiqueta("Automotora", 115, 40, 300, 40,
                 "Forte", 30);
 
@@ -30,13 +34,13 @@ public class MenuVentas extends Ventana implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == btnRegistroClientes) {
-            VentanaRegistroClientes ventanaRegistroClientes = new VentanaRegistroClientes();
+            VentanaRegistroClientes ventanaRegistroClientes = new VentanaRegistroClientes(this.automotora);
             this.dispose();
         } else if(e.getSource() == btnRegistroVehiculos) {
-            VentanaRegistroVehiculos ventanaRegistroVehiculos = new VentanaRegistroVehiculos();
+            VentanaRegistroVehiculos ventanaRegistroVehiculos = new VentanaRegistroVehiculos(this.automotora);
             this.dispose();
         } else if(e.getSource() == btnBusquedaVehiculos) {
-            VentanaBusquedaVehiculos ventanaBusquedaVehiculos = new VentanaBusquedaVehiculos();
+            VentanaBusquedaVehiculos ventanaBusquedaVehiculos = new VentanaBusquedaVehiculos(this.automotora);
             this.dispose();
         } else if(e.getSource() == btnVenderVehiculo) {
             JOptionPane.showMessageDialog(this, "Próximamente", "Mensaje informativo",
