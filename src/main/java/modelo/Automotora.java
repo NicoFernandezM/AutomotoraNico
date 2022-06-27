@@ -39,7 +39,9 @@ public class Automotora {
     }
 
     public boolean añadirVendedor(Vendedor vendedor) {
-        if (DigitoVerificador.validarRut(vendedor.getRut())) {
+        String rut = vendedor.getRut();
+
+        if (DigitoVerificador.validarRut(rut) && !vendedorExiste(rut)) {
             this.vendedores.add(vendedor);
             GestorDatos.registrarDato(vendedor, "vendedor.txt");
             return true;
@@ -49,11 +51,38 @@ public class Automotora {
     }
 
     public boolean añadirCliente(Cliente cliente) {
-        if (DigitoVerificador.validarRut(cliente.getRut())) {
+        String rut = cliente.getRut();
+
+        if (DigitoVerificador.validarRut(rut) && !clienteExiste(rut)) {
             this.clientes.add(cliente);
             return true;
         }
         return false;
+    }
+
+    public boolean clienteExiste(String rut) {
+        for (Cliente c: this.clientes) {
+            if(c.getRut().equals(rut)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public boolean vendedorExiste(String rut) {
+        for (Vendedor v: this.vendedores) {
+            if(v.getRut().equals(rut)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public void registrarAuto(Vehiculo vehiculo) {
+
+        this.vehiculosAVenta.add(vehiculo);
     }
 
     public void añadirVehiculosPorVender() {
@@ -138,7 +167,7 @@ public class Automotora {
     }
 
     public void mostrarVentas() throws IOException {
-        System.out.println(ventas);//Preguntar porqué funciona
+        System.out.println(ventas);
         GestorPDF gestorPDF = new GestorPDF();
         for (Venta venta : ventas) {
             gestorPDF.generarBoleta(venta);

@@ -15,7 +15,8 @@ public class GestorDatos {
             while((textoArchivo = br.readLine()) != null){
                 String[] data = textoArchivo.split(",");
                 automotora.getVehiculosAVenta().add(new Vehiculo(data[0],
-                        ColorVehiculo.valueOf(data[1].toUpperCase()), MarcaVehiculo.valueOf(data[2].toUpperCase()),
+                        ColorVehiculo.valueOf(data[1].toUpperCase()),
+                        MarcaVehiculo.valueOf(data[2].toUpperCase()),
                         Integer.parseInt(data[3]),Integer.parseInt(data[4]),Double.parseDouble(data[5])));
             }
         } catch (Exception e) {

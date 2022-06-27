@@ -7,21 +7,19 @@ import modelo.Cliente;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.NumberFormat;
 
 public class VentanaRegistroClientes extends Ventana implements ActionListener {
-    Automotora automotora;
+    private Automotora automotora;
 
-    JTextField nombreField;
-    JTextField rutField;
-    JTextField direccionField;
-    JTextField numeroField;
-    //JFormattedTextField numeroField;
-    JTextField correoField;
+    private JTextField nombreField;
+    private JTextField rutField;
+    private JTextField direccionField;
+    private JTextField numeroField;
+    private JTextField correoField;
 
-    JButton volverBtn;
-    JButton aceptarBtn;
-    JButton cancelarBtn;
+    private JButton volverBtn;
+    private JButton aceptarBtn;
+    private JButton cancelarBtn;
 
     public VentanaRegistroClientes(Automotora automotora) {
         this.automotora = automotora;
@@ -39,10 +37,6 @@ public class VentanaRegistroClientes extends Ventana implements ActionListener {
         this.rutField = this.generarCampoDeTexto(150,250,200,25);
         this.direccionField = this.generarCampoDeTexto(150,300,200,25);
         this.numeroField = this.generarCampoDeTexto(150,350,200,25);
-        /*numeroField = new JFormattedTextField(NumberFormat.getNumberInstance());
-        numeroField.setBounds(150,350,200,25);
-        this.add(numeroField);*/
-
         this.correoField = this.generarCampoDeTexto(150,400,200,25);
 
         volverBtn = this.generarBoton("<--", 20,20,50,25);
@@ -64,8 +58,9 @@ public class VentanaRegistroClientes extends Ventana implements ActionListener {
                     "Mensaje informativo", JOptionPane.INFORMATION_MESSAGE);
             GestorDatos.registrarDato(cliente, "target.clientes.txt");
         } else {
-            JOptionPane.showMessageDialog(this, "Rut ingresado inválido",
-                    "Mensaje informativo", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this,
+                    "El rut es incorrecto o el cliente ya está registrado",
+                    "Rut ingresado inválido", JOptionPane.INFORMATION_MESSAGE);
         }
 
     }
@@ -82,11 +77,10 @@ public class VentanaRegistroClientes extends Ventana implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == volverBtn) {
             this.dispose();
-            MenuVentas menuVentas = new MenuVentas(this.automotora);
+            new MenuVentas(this.automotora);
         } else if(e.getSource() == aceptarBtn) {
             registrarCliente();
             limpiarTextField();
-            System.out.println(automotora.getClientes());
         } else if(e.getSource() == cancelarBtn) {
             limpiarTextField();
         }

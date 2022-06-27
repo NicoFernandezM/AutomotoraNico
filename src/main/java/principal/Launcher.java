@@ -3,6 +3,7 @@ package principal;
 import gui.MenuVentas;
 import modelo.Automotora;
 import dato.GestorDatos;
+import modelo.Venta;
 
 import java.io.IOException;
 

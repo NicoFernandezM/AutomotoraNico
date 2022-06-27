@@ -7,12 +7,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class MenuVentas extends Ventana implements ActionListener {
-    JButton btnRegistroClientes;
-    JButton btnRegistroVehiculos;
-    JButton btnBusquedaVehiculos;
-    JButton btnVenderVehiculo;
-    JButton btnSalir;
-    Automotora automotora;
+    private JButton btnRegistroClientes;
+    private JButton btnRegistroVehiculos;
+    private JButton btnBusquedaVehiculos;
+    private JButton btnVenderVehiculo;
+    private JButton btnSalir;
+    private Automotora automotora;
 
     public MenuVentas(Automotora automotora) {
         this.automotora = automotora;
@@ -34,13 +34,13 @@ public class MenuVentas extends Ventana implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == btnRegistroClientes) {
-            VentanaRegistroClientes ventanaRegistroClientes = new VentanaRegistroClientes(this.automotora);
+            new VentanaRegistroClientes(this.automotora);
             this.dispose();
         } else if(e.getSource() == btnRegistroVehiculos) {
-            VentanaRegistroVehiculos ventanaRegistroVehiculos = new VentanaRegistroVehiculos(this.automotora);
+            new VentanaRegistroVehiculos(this.automotora);
             this.dispose();
         } else if(e.getSource() == btnBusquedaVehiculos) {
-            VentanaBusquedaVehiculos ventanaBusquedaVehiculos = new VentanaBusquedaVehiculos(this.automotora);
+            new VentanaBusquedaVehiculos(this.automotora);
             this.dispose();
         } else if(e.getSource() == btnVenderVehiculo) {
             JOptionPane.showMessageDialog(this, "Próximamente", "Mensaje informativo",

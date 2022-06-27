@@ -10,14 +10,14 @@ import java.awt.event.ActionListener;
 import java.util.List;
 
 public class VentanaBusquedaVehiculos extends Ventana implements ActionListener {
-    Automotora automotora;
+    private Automotora automotora;
 
-    JComboBox <MarcaVehiculo> marcasBox = new JComboBox<>(MarcaVehiculo.values());
-    JButton volverBtn;
-    JButton buscarBtn;
-    JButton cancelarBtn;
+    private JComboBox <MarcaVehiculo> marcasBox = new JComboBox<>(MarcaVehiculo.values());
+    private JButton volverBtn;
+    private JButton buscarBtn;
+    private JButton cancelarBtn;
 
-    JTextField nombreField;
+    private JTextField nombreField;
 
     public VentanaBusquedaVehiculos (Automotora automotora) {
         this.automotora = automotora;
@@ -46,6 +46,7 @@ public class VentanaBusquedaVehiculos extends Ventana implements ActionListener 
 
     public void buscarAuto() {
         List<Vehiculo> vehiculos = this.automotora.buscarAutoMarca(marcasBox.getSelectedItem().toString());
+
         if(!nombreField.getText().equals("")) {
             vehiculos = this.automotora.buscarAutoNombre(nombreField.getText(), vehiculos);
         }

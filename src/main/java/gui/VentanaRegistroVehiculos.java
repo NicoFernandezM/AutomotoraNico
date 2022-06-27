@@ -1,29 +1,32 @@
 package gui;
 
+import dato.GestorDatos;
 import modelo.Automotora;
 import modelo.ColorVehiculo;
 import modelo.MarcaVehiculo;
+import modelo.Vehiculo;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class VentanaRegistroVehiculos extends Ventana implements ActionListener {
-    Automotora automotora;
+    private Automotora automotora;
 
-    JComboBox <MarcaVehiculo> marcasBox = new JComboBox<>(MarcaVehiculo.values());
-    JComboBox <ColorVehiculo> colorVehiculoBox = new JComboBox<>(ColorVehiculo.values());
-    JComboBox añoBox;
-    JFormattedTextField precioField;
-    JFormattedTextField kmField;
+    private JComboBox <MarcaVehiculo> marcasBox = new JComboBox<>(MarcaVehiculo.values());
+    private JComboBox <ColorVehiculo> colorVehiculoBox = new JComboBox<>(ColorVehiculo.values());
+    private JComboBox añoBox;
 
-    JTextField nombreField;
+    private JTextField precioField;
+    private JTextField kmField;
+    private JTextField nombreField;
 
-    JButton volverBtn;
-    JButton aceptarBtn;
-    JButton cancelarBtn;
+    private JButton volverBtn;
+    private JButton registrarBtn;
+    private JButton cancelarBtn;
 
     public VentanaRegistroVehiculos (Automotora automotora) {
+        this.automotora = automotora;
         JLabel titulo = this.generarEtiqueta("Registro Vehículos", 70, 80,
                 300, 40,"Forte", 30);
 
@@ -54,16 +57,58 @@ public class VentanaRegistroVehiculos extends Ventana implements ActionListener 
 
         añoBox = this.generarComboBox(1950, 2022, 160, 300,120,20);
 
-        precioField = this.generarCampoDeTextoFormateado(160, 350, 150, 20);
-        kmField = this.generarCampoDeTextoFormateado(160, 400, 150, 20);
+        precioField = this.generarCampoDeTexto(160, 350, 150, 20);
+        kmField = this.generarCampoDeTexto(160, 400, 150, 20);
 
         volverBtn = this.generarBoton("<--", 20,20,50,25);
-        aceptarBtn = this.generarBoton("Aceptar", 100,450,100,50);
+        registrarBtn = this.generarBoton("Aceptar", 100,450,100,50);
         cancelarBtn = this.generarBoton("Cancelar", 200,450,100,50);
 
         volverBtn.addActionListener(this);
-        aceptarBtn.addActionListener(this);
+        registrarBtn.addActionListener(this);
         cancelarBtn.addActionListener(this);
+    }
+
+    public boolean esNumero(String entrada) {
+        return entrada.matches("[+-]?\\d*(\\.\\d+)?") && !entrada.equals("");
+    }
+
+    public void limpiarTextField() {
+        precioField.setText("");
+        kmField.setText("");
+        nombreField.setText("");
+    }
+
+    public boolean validarEntradas() {
+        return !nombreField.getText().equals("") && esNumero(precioField.getText()) &&
+                esNumero(kmField.getText());
+    }
+
+    public void registrarAuto() {
+        if(validarEntradas()) {
+            Vehiculo vehiculo = new Vehiculo(nombreField.getText(), obtenerColor(),
+                    obtenerMarca(), Integer.parseInt(añoBox.getSelectedItem().toString()),
+                    Integer.parseInt(precioField.getText()), Integer.parseInt(kmField.getText()));
+
+            this.automotora.registrarAuto(vehiculo);
+            GestorDatos.registrarDato(vehiculo, "target.vehiculos.txt");
+
+            JOptionPane.showMessageDialog(this, "Vehículo registrado correctamente",
+                    "Mensaje informativo", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(this,
+                    "Datos incorrectos, por favor intente nuevamente",
+                    "Mensaje informativo", JOptionPane.INFORMATION_MESSAGE);
+        }
+
+    }
+
+    public MarcaVehiculo obtenerMarca() {
+        return (MarcaVehiculo) marcasBox.getSelectedItem();
+    }
+
+    public ColorVehiculo obtenerColor() {
+        return (ColorVehiculo) colorVehiculoBox.getSelectedItem();
     }
 
     @Override
@@ -72,9 +117,10 @@ public class VentanaRegistroVehiculos extends Ventana implements ActionListener 
             this.dispose();
             new MenuVentas(this.automotora);
         } else if(e.getSource() == cancelarBtn) {
-            nombreField.setText("");
-            precioField.setText("");
-            kmField.setText("");
+            limpiarTextField();
+        } else if(e.getSource() == registrarBtn) {
+            registrarAuto();
+            limpiarTextField();
         }
     }
 }
